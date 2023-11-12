@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20231112113907",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "teacher",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "teacherCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "jobPosition",
+      "fieldType": "JobPosition",
+      "fieldValues": "TEACHER,SENIORTEACHER,BRANCHMANAGER,PROFESSOR,SUBPROFESSOR,DOCTOR,SUBDOCTOR"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Teacher",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

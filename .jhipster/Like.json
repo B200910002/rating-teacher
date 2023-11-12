@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20231112113910",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "jhi_like",
+  "fields": [
+    {
+      "fieldName": "timeStamp",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Like",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "rating",
+      "otherEntityRelationshipName": "like",
+      "relationshipName": "rating",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

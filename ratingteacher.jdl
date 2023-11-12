@@ -1,0 +1,137 @@
+enum LoginType {
+	MUST,
+    GOOGLE,
+    FB
+}
+
+enum LessonType{
+	Lecture, 
+    Seminar,
+    Laboratory,
+    Practice,
+    Assignment
+}
+
+enum WeekDay{
+    MONDAY,
+    TUESDAY, 
+    WEDNESDAY,
+    THURSDAY, 
+    FRIDAY,
+    SATURDAY, 
+    SUNDAY
+}
+
+enum JobPosition{
+	TEACHER,
+    SENIORTEACHER,
+    BRANCHMANAGER,
+    PROFESSOR,
+    SUBPROFESSOR,
+    DOCTOR,
+    SUBDOCTOR
+}
+
+entity Student {
+	firstName String,
+    lastName String,
+    studentCode String,
+    email String,
+    phone String,
+    loginType LoginType,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Teacher {
+	firstName String,
+    lastName String,
+    teacherCode String,
+    jobPosition JobPosition,
+    email String,
+    phone String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Lesson {
+	lessonName String,
+    lessonCode String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Rating {
+	score Integer,
+    review String,
+    lessonName String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Like {
+	timeStamp Instant
+}
+
+entity Question {
+	question String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Answer {
+	answer String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity Schedule{
+	lessonType LessonType,
+	weekDay WeekDay,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant
+}
+
+entity LessonTime{
+	name String,
+    startAt Instant,
+    endAt Instant
+}
+
+entity Room{
+	roomCode String
+}
+
+relationship ManyToOne {
+	Rating{Teacher} to Teacher,
+    Rating{Student} to Student,
+    Schedule{Room} to Room,
+    Schedule{LessonTime} to LessonTime,
+    Schedule{Lesson} to Lesson,
+    Schedule{Teacher} to Teacher,
+    Like{Student} to Student
+}
+
+relationship OneToMany {
+    Rating to Like{Rating},
+	Rating to Question{Rating},
+    Question to Answer{Question},
+}
+
+filter *
+dto * with mapstruct
+service * with serviceClass

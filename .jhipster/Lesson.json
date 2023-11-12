@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20231112113908",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "lesson",
+  "fields": [
+    {
+      "fieldName": "lessonName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lessonCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Lesson",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

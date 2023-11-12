@@ -1,0 +1,67 @@
+{
+  "applications": "*",
+  "changelogDate": "20231112113909",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "rating",
+  "fields": [
+    {
+      "fieldName": "score",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "review",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lessonName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Rating",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "like",
+      "otherEntityRelationshipName": "rating",
+      "relationshipName": "like",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "rating",
+      "relationshipName": "question",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "teacher",
+      "relationshipName": "teacher",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

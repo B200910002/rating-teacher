@@ -1,0 +1,63 @@
+{
+  "applications": "*",
+  "changelogDate": "20231112113913",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "schedule",
+  "fields": [
+    {
+      "fieldName": "lessonType",
+      "fieldType": "LessonType",
+      "fieldValues": "Lecture,Seminar,Laboratory,Practice,Assignment"
+    },
+    {
+      "fieldName": "weekDay",
+      "fieldType": "WeekDay",
+      "fieldValues": "MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Schedule",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "room",
+      "relationshipName": "room",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "lessonTime",
+      "relationshipName": "lessonTime",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "lesson",
+      "relationshipName": "lesson",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "teacher",
+      "relationshipName": "teacher",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

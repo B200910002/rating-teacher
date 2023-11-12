@@ -3,6 +3,11 @@ package com.ocean.domain;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Lesson.
@@ -10,6 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "lesson")
 @SuppressWarnings("common-java:DuplicatedBlocks")
+@EntityListeners(AuditingEntityListener.class)
 public class Lesson implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,15 +32,19 @@ public class Lesson implements Serializable {
     private String lessonCode;
 
     @Column(name = "created_by")
+    @CreatedBy
     private String createdBy;
 
     @Column(name = "created_date")
+    @CreatedDate
     private Instant createdDate;
 
     @Column(name = "last_modified_by")
+    @LastModifiedBy
     private String lastModifiedBy;
 
     @Column(name = "last_modified_date")
+    @LastModifiedDate
     private Instant lastModifiedDate;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -130,7 +140,8 @@ public class Lesson implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -145,7 +156,8 @@ public class Lesson implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -153,13 +165,13 @@ public class Lesson implements Serializable {
     @Override
     public String toString() {
         return "Lesson{" +
-            "id=" + getId() +
-            ", lessonName='" + getLessonName() + "'" +
-            ", lessonCode='" + getLessonCode() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
-            "}";
+                "id=" + getId() +
+                ", lessonName='" + getLessonName() + "'" +
+                ", lessonCode='" + getLessonCode() + "'" +
+                ", createdBy='" + getCreatedBy() + "'" +
+                ", createdDate='" + getCreatedDate() + "'" +
+                ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+                ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+                "}";
     }
 }

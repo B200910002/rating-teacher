@@ -5,6 +5,11 @@ import com.ocean.domain.enumeration.WeekDay;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Schedule.
@@ -12,6 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "schedule")
 @SuppressWarnings("common-java:DuplicatedBlocks")
+@EntityListeners(AuditingEntityListener.class)
 public class Schedule implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,15 +36,19 @@ public class Schedule implements Serializable {
     private WeekDay weekDay;
 
     @Column(name = "created_by")
+    @CreatedBy
     private String createdBy;
 
     @Column(name = "created_date")
+    @CreatedDate
     private Instant createdDate;
 
     @Column(name = "last_modified_by")
+    @LastModifiedBy
     private String lastModifiedBy;
 
     @Column(name = "last_modified_date")
+    @LastModifiedDate
     private Instant lastModifiedDate;
 
     @ManyToOne
@@ -198,7 +208,8 @@ public class Schedule implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -213,7 +224,8 @@ public class Schedule implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -221,13 +233,13 @@ public class Schedule implements Serializable {
     @Override
     public String toString() {
         return "Schedule{" +
-            "id=" + getId() +
-            ", lessonType='" + getLessonType() + "'" +
-            ", weekDay='" + getWeekDay() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
-            "}";
+                "id=" + getId() +
+                ", lessonType='" + getLessonType() + "'" +
+                ", weekDay='" + getWeekDay() + "'" +
+                ", createdBy='" + getCreatedBy() + "'" +
+                ", createdDate='" + getCreatedDate() + "'" +
+                ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+                ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+                "}";
     }
 }

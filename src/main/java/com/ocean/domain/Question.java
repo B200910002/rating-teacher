@@ -6,6 +6,11 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Question.
@@ -13,6 +18,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "question")
 @SuppressWarnings("common-java:DuplicatedBlocks")
+@EntityListeners(AuditingEntityListener.class)
 public class Question implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,15 +32,19 @@ public class Question implements Serializable {
     private String question;
 
     @Column(name = "created_by")
+    @CreatedBy
     private String createdBy;
 
     @Column(name = "created_date")
+    @CreatedDate
     private Instant createdDate;
 
     @Column(name = "last_modified_by")
+    @LastModifiedBy
     private String lastModifiedBy;
 
     @Column(name = "last_modified_date")
+    @LastModifiedDate
     private Instant lastModifiedDate;
 
     @OneToMany(mappedBy = "question")
@@ -169,7 +179,8 @@ public class Question implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -184,7 +195,8 @@ public class Question implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -192,12 +204,12 @@ public class Question implements Serializable {
     @Override
     public String toString() {
         return "Question{" +
-            "id=" + getId() +
-            ", question='" + getQuestion() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
-            "}";
+                "id=" + getId() +
+                ", question='" + getQuestion() + "'" +
+                ", createdBy='" + getCreatedBy() + "'" +
+                ", createdDate='" + getCreatedDate() + "'" +
+                ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+                ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+                "}";
     }
 }

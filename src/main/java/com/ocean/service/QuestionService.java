@@ -95,9 +95,9 @@ public class QuestionService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<QuestionDTO> findOne(Long id) {
+    public Optional<Question> findOne(Long id) {
         log.debug("Request to get Question : {}", id);
-        return questionRepository.findById(id).map(questionMapper::toDto);
+        return questionRepository.findById(id);
     }
 
     /**

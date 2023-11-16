@@ -1,5 +1,6 @@
 package com.ocean.web.rest;
 
+import com.ocean.domain.Schedule;
 import com.ocean.repository.ScheduleRepository;
 import com.ocean.service.ScheduleQueryService;
 import com.ocean.service.ScheduleService;
@@ -146,9 +147,9 @@ public class ScheduleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of schedules in body.
      */
     @GetMapping("/schedules")
-    public ResponseEntity<List<ScheduleDTO>> getAllSchedules(ScheduleCriteria criteria) {
-        log.debug("REST request to get Schedules by criteria: {}", criteria);
-        List<ScheduleDTO> entityList = scheduleQueryService.findByCriteria(criteria);
+    public ResponseEntity<List<Schedule>> getAllSchedules() {
+        log.debug("REST request to get Schedules by criteria: {}");
+        List<Schedule> entityList = scheduleService.findAll();
         return ResponseEntity.ok().body(entityList);
     }
 
@@ -171,10 +172,10 @@ public class ScheduleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the scheduleDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/schedules/{id}")
-    public ResponseEntity<ScheduleDTO> getSchedule(@PathVariable Long id) {
+    public ResponseEntity<Schedule> getSchedule(@PathVariable Long id) {
         log.debug("REST request to get Schedule : {}", id);
-        Optional<ScheduleDTO> scheduleDTO = scheduleService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(scheduleDTO);
+        Optional<Schedule> schedule = scheduleService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(schedule);
     }
 
     /**

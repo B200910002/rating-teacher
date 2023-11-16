@@ -1,5 +1,6 @@
 package com.ocean.web.rest;
 
+import com.ocean.domain.Answer;
 import com.ocean.repository.AnswerRepository;
 import com.ocean.service.AnswerQueryService;
 import com.ocean.service.AnswerService;
@@ -167,10 +168,10 @@ public class AnswerResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answerDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/answers/{id}")
-    public ResponseEntity<AnswerDTO> getAnswer(@PathVariable Long id) {
+    public ResponseEntity<Answer> getAnswer(@PathVariable Long id) {
         log.debug("REST request to get Answer : {}", id);
-        Optional<AnswerDTO> answerDTO = answerService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(answerDTO);
+        Optional<Answer> answer = answerService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(answer);
     }
 
     /**

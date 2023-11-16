@@ -1,5 +1,6 @@
 package com.ocean.web.rest;
 
+import com.ocean.domain.Rating;
 import com.ocean.repository.RatingRepository;
 import com.ocean.service.RatingQueryService;
 import com.ocean.service.RatingService;
@@ -169,10 +170,10 @@ public class RatingResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the ratingDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/ratings/{id}")
-    public ResponseEntity<RatingDTO> getRating(@PathVariable Long id) {
+    public ResponseEntity<Rating> getRating(@PathVariable Long id) {
         log.debug("REST request to get Rating : {}", id);
-        Optional<RatingDTO> ratingDTO = ratingService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(ratingDTO);
+        Optional<Rating> rating = ratingService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(rating);
     }
 
     /**

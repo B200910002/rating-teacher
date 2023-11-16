@@ -83,9 +83,9 @@ public class ScheduleService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<ScheduleDTO> findAll() {
+    public List<Schedule> findAll() {
         log.debug("Request to get all Schedules");
-        return scheduleRepository.findAll().stream().map(scheduleMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return scheduleRepository.findAll();
     }
 
     /**
@@ -95,9 +95,9 @@ public class ScheduleService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<ScheduleDTO> findOne(Long id) {
+    public Optional<Schedule> findOne(Long id) {
         log.debug("Request to get Schedule : {}", id);
-        return scheduleRepository.findById(id).map(scheduleMapper::toDto);
+        return scheduleRepository.findById(id);
     }
 
     /**

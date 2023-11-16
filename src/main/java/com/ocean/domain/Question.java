@@ -47,7 +47,7 @@ public class Question implements Serializable {
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "question" }, allowSetters = true)
     private Set<Answer> answers = new HashSet<>();
 

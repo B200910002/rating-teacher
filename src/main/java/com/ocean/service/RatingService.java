@@ -95,9 +95,9 @@ public class RatingService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<RatingDTO> findOne(Long id) {
+    public Optional<Rating> findOne(Long id) {
         log.debug("Request to get Rating : {}", id);
-        return ratingRepository.findById(id).map(ratingMapper::toDto);
+        return ratingRepository.findById(id);
     }
 
     /**

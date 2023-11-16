@@ -57,11 +57,11 @@ public class Rating implements Serializable {
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @OneToMany(mappedBy = "rating")
+    @OneToMany(mappedBy = "rating", fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "student", "rating" }, allowSetters = true)
     private Set<Like> likes = new HashSet<>();
 
-    @OneToMany(mappedBy = "rating")
+    @OneToMany(mappedBy = "rating", fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "answers", "rating" }, allowSetters = true)
     private Set<Question> questions = new HashSet<>();
 

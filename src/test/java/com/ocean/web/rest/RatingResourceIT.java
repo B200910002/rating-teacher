@@ -38,9 +38,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class RatingResourceIT {
 
-    private static final Integer DEFAULT_SCORE = 1;
-    private static final Integer UPDATED_SCORE = 2;
-    private static final Integer SMALLER_SCORE = 1 - 1;
+    private static final Integer DEFAULT_SCORE = 0;
+    private static final Integer UPDATED_SCORE = 1;
+    private static final Integer SMALLER_SCORE = 0 - 1;
 
     private static final String DEFAULT_REVIEW = "AAAAAAAAAA";
     private static final String UPDATED_REVIEW = "BBBBBBBBBB";
@@ -271,8 +271,8 @@ class RatingResourceIT {
         // Get all the ratingList where score is greater than or equal to DEFAULT_SCORE
         defaultRatingShouldBeFound("score.greaterThanOrEqual=" + DEFAULT_SCORE);
 
-        // Get all the ratingList where score is greater than or equal to UPDATED_SCORE
-        defaultRatingShouldNotBeFound("score.greaterThanOrEqual=" + UPDATED_SCORE);
+        // Get all the ratingList where score is greater than or equal to (DEFAULT_SCORE + 1)
+        defaultRatingShouldNotBeFound("score.greaterThanOrEqual=" + (DEFAULT_SCORE + 1));
     }
 
     @Test
@@ -297,8 +297,8 @@ class RatingResourceIT {
         // Get all the ratingList where score is less than DEFAULT_SCORE
         defaultRatingShouldNotBeFound("score.lessThan=" + DEFAULT_SCORE);
 
-        // Get all the ratingList where score is less than UPDATED_SCORE
-        defaultRatingShouldBeFound("score.lessThan=" + UPDATED_SCORE);
+        // Get all the ratingList where score is less than (DEFAULT_SCORE + 1)
+        defaultRatingShouldBeFound("score.lessThan=" + (DEFAULT_SCORE + 1));
     }
 
     @Test

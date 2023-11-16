@@ -6,6 +6,8 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -28,6 +30,8 @@ public class Rating implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Min(value = 0)
+    @Max(value = 5)
     @Column(name = "score")
     private Integer score;
 

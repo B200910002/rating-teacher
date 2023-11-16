@@ -68,7 +68,7 @@ entity Lesson {
 }
 
 entity Rating {
-	score Integer,
+	score Integer min(0) max(5),
     review String,
     lessonName String,
     createdBy String,

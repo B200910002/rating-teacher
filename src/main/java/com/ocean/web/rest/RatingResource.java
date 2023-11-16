@@ -11,6 +11,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,7 +55,7 @@ public class RatingResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/ratings")
-    public ResponseEntity<RatingDTO> createRating(@RequestBody RatingDTO ratingDTO) throws URISyntaxException {
+    public ResponseEntity<RatingDTO> createRating(@Valid @RequestBody RatingDTO ratingDTO) throws URISyntaxException {
         log.debug("REST request to save Rating : {}", ratingDTO);
         if (ratingDTO.getId() != null) {
             throw new BadRequestAlertException("A new rating cannot already have an ID", ENTITY_NAME, "idexists");
@@ -78,7 +80,7 @@ public class RatingResource {
     @PutMapping("/ratings/{id}")
     public ResponseEntity<RatingDTO> updateRating(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody RatingDTO ratingDTO
+        @Valid @RequestBody RatingDTO ratingDTO
     ) throws URISyntaxException {
         log.debug("REST request to update Rating : {}, {}", id, ratingDTO);
         if (ratingDTO.getId() == null) {
@@ -113,7 +115,7 @@ public class RatingResource {
     @PatchMapping(value = "/ratings/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<RatingDTO> partialUpdateRating(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody RatingDTO ratingDTO
+        @NotNull @RequestBody RatingDTO ratingDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Rating partially : {}, {}", id, ratingDTO);
         if (ratingDTO.getId() == null) {

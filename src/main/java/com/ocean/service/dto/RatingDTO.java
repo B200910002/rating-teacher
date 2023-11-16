@@ -3,6 +3,7 @@ package com.ocean.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.ocean.domain.Rating} entity.
@@ -12,6 +13,8 @@ public class RatingDTO implements Serializable {
 
     private Long id;
 
+    @Min(value = 0)
+    @Max(value = 5)
     private Integer score;
 
     private String review;

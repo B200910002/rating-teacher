@@ -9,9 +9,12 @@ import com.ocean.service.dto.RatingDTO;
 import com.ocean.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -145,9 +148,24 @@ public class RatingResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ratings in body.
      */
     @GetMapping("/ratings")
-    public ResponseEntity<List<Rating>> getAllRatings() {
+    public ResponseEntity<List<Rating>> getAllRatings(@RequestParam(name = "teacherId", required = false) Long teacherId) {
         log.debug("REST request to get Ratings by criteria: {}");
         List<Rating> entityList = ratingService.findAll();
+        if (teacherId != null) {
+            entityList =
+                entityList
+                    .stream()
+                    .filter(rating -> {
+                        if (rating.getTeacher() != null) {
+                            return rating.getTeacher().getId() == teacherId;
+                        } else {
+                            return false;
+                        }
+                    })
+                    .collect(Collectors.toList());
+        }
+
+        Collections.sort(entityList, Comparator.comparing(Rating::getCreatedDate).reversed());
         return ResponseEntity.ok().body(entityList);
     }
 

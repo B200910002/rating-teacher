@@ -83,9 +83,9 @@ public class QuestionService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<QuestionDTO> findAll() {
+    public List<Question> findAll() {
         log.debug("Request to get all Questions");
-        return questionRepository.findAll().stream().map(questionMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return questionRepository.findAll();
     }
 
     /**

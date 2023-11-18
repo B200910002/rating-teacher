@@ -145,9 +145,9 @@ public class RatingResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ratings in body.
      */
     @GetMapping("/ratings")
-    public ResponseEntity<List<RatingDTO>> getAllRatings(RatingCriteria criteria) {
-        log.debug("REST request to get Ratings by criteria: {}", criteria);
-        List<RatingDTO> entityList = ratingQueryService.findByCriteria(criteria);
+    public ResponseEntity<List<Rating>> getAllRatings() {
+        log.debug("REST request to get Ratings by criteria: {}");
+        List<Rating> entityList = ratingService.findAll();
         return ResponseEntity.ok().body(entityList);
     }
 

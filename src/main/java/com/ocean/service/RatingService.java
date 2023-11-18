@@ -83,9 +83,9 @@ public class RatingService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<RatingDTO> findAll() {
+    public List<Rating> findAll() {
         log.debug("Request to get all Ratings");
-        return ratingRepository.findAll().stream().map(ratingMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return ratingRepository.findAll();
     }
 
     /**

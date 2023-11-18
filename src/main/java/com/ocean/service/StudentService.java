@@ -100,6 +100,12 @@ public class StudentService {
         return studentRepository.findById(id).map(studentMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<StudentDTO> findOneByStudentCode(String studentCode) {
+        log.debug("Request to get Student : {}", studentCode);
+        return studentRepository.findOneByStudentCode(studentCode).map(studentMapper::toDto);
+    }
+
     /**
      * Delete the student by id.
      *

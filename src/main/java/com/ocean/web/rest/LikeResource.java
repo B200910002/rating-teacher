@@ -1,10 +1,14 @@
 package com.ocean.web.rest;
 
+import com.ocean.domain.Like;
 import com.ocean.repository.LikeRepository;
+import com.ocean.security.SecurityUtils;
 import com.ocean.service.LikeQueryService;
 import com.ocean.service.LikeService;
+import com.ocean.service.StudentService;
 import com.ocean.service.criteria.LikeCriteria;
 import com.ocean.service.dto.LikeDTO;
+import com.ocean.service.dto.StudentDTO;
 import com.ocean.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,6 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +44,9 @@ public class LikeResource {
 
     private final LikeQueryService likeQueryService;
 
+    @Autowired
+    private StudentService studentService;
+
     public LikeResource(LikeService likeService, LikeRepository likeRepository, LikeQueryService likeQueryService) {
         this.likeService = likeService;
         this.likeRepository = likeRepository;
@@ -55,6 +63,15 @@ public class LikeResource {
     @PostMapping("/likes")
     public ResponseEntity<LikeDTO> createLike(@RequestBody LikeDTO likeDTO) throws URISyntaxException {
         log.debug("REST request to save Like : {}", likeDTO);
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        if (currentUserLogin.isPresent()) {
+            Optional<StudentDTO> student = studentService.findOneByStudentCode(currentUserLogin.get());
+            System.out.println("pezda: " + student);
+            if (student.isPresent()) {
+                likeDTO.setStudent(student.get());
+            }
+        }
+
         if (likeDTO.getId() != null) {
             throw new BadRequestAlertException("A new like cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -140,9 +157,9 @@ public class LikeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of likes in body.
      */
     @GetMapping("/likes")
-    public ResponseEntity<List<LikeDTO>> getAllLikes(LikeCriteria criteria) {
+    public ResponseEntity<List<Like>> getAllLikes(LikeCriteria criteria) {
         log.debug("REST request to get Likes by criteria: {}", criteria);
-        List<LikeDTO> entityList = likeQueryService.findByCriteria(criteria);
+        List<Like> entityList = likeService.findAll();
         return ResponseEntity.ok().body(entityList);
     }
 
@@ -165,10 +182,10 @@ public class LikeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the likeDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/likes/{id}")
-    public ResponseEntity<LikeDTO> getLike(@PathVariable Long id) {
+    public ResponseEntity<Like> getLike(@PathVariable Long id) {
         log.debug("REST request to get Like : {}", id);
-        Optional<LikeDTO> likeDTO = likeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(likeDTO);
+        Optional<Like> like = likeService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(like);
     }
 
     /**

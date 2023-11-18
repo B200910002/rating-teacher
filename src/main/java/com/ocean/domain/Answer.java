@@ -45,6 +45,9 @@ public class Answer implements Serializable {
     @LastModifiedDate
     private Instant lastModifiedDate;
 
+    @Column(name = "teacher_id")
+    private Long teacherId;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "answers", "rating" }, allowSetters = true)
     private Question question;
@@ -129,6 +132,19 @@ public class Answer implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public Long getTeacherId() {
+        return this.teacherId;
+    }
+
+    public Answer teacherId(Long teacherId) {
+        this.setTeacherId(teacherId);
+        return this;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public Question getQuestion() {
         return this.question;
     }
@@ -171,6 +187,7 @@ public class Answer implements Serializable {
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", teacherId=" + getTeacherId() +
             "}";
     }
 }

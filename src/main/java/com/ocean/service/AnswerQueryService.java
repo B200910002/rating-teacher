@@ -105,6 +105,9 @@ public class AnswerQueryService extends QueryService<Answer> {
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), Answer_.lastModifiedDate));
             }
+            if (criteria.getTeacherId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTeacherId(), Answer_.teacherId));
+            }
             if (criteria.getQuestionId() != null) {
                 specification =
                     specification.and(

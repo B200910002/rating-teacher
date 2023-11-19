@@ -811,10 +811,14 @@
                                 <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                                 <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                                 <driver>com.mysql.cj.jdbc.Driver</driver>
-                                <url>jdbc:mysql://localhost:3306/ratingteacher</url>
-                                <defaultSchemaName>ratingteacher</defaultSchemaName>
-                                <username>root</username>
-                                <password></password>
+                                <!-- <url>jdbc:mysql://localhost:3306/ratingteacher</url> -->
+                                <!-- <defaultSchemaName>ratingteacher</defaultSchemaName> -->
+                                <!-- <username>root</username>
+                                <password></password> -->
+                                <url>jdbc:mysql://x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/jupup7ambelwoqw8</url>
+                                <defaultSchemaName>jupup7ambelwoqw8</defaultSchemaName>
+                                <username>m9vkucetqpvjjy1q</username>
+                                <password>et98zsolfmt0l6e2</password>
                                 <referenceUrl>hibernate:spring:com.ocean.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>
@@ -906,10 +910,14 @@
                                 <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                                 <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                                 <driver>com.mysql.cj.jdbc.Driver</driver>
-                                <url>jdbc:mysql://localhost:3306/ratingteacher</url>
-                                <defaultSchemaName>ratingteacher</defaultSchemaName>
-                                <username>root</username>
-                                <password></password>
+                                <!-- <url>jdbc:mysql://localhost:3306/ratingteacher</url>
+                                <defaultSchemaName>ratingteacher</defaultSchemaName> -->
+                                <!-- <username>root</username>
+                                <password></password> -->
+                                <url>jdbc:mysql://x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/jupup7ambelwoqw8</url>
+                                <defaultSchemaName>jupup7ambelwoqw8</defaultSchemaName>
+                                <username>m9vkucetqpvjjy1q</username>
+                                <password>et98zsolfmt0l6e2</password>
                                 <referenceUrl>hibernate:spring:com.ocean.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>

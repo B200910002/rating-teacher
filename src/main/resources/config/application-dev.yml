@@ -48,9 +48,9 @@ spring:
       # it can be set to any label, branch or commit of the configuration source Git repository
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/ratingteacher?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-    username: root
-    password: 1234
+    url: jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12663204?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: sql12663204
+    password: negejGKgAM
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -88,7 +88,7 @@ spring:
         enabled: true
 
 server:
-  port: 8080
+  port: 8089
 
 # ===================================================================
 # JHipster specific properties

@@ -33,6 +33,8 @@ public class AnswerCriteria implements Serializable, Criteria {
 
     private InstantFilter lastModifiedDate;
 
+    private LongFilter teacherId;
+
     private LongFilter questionId;
 
     private Boolean distinct;
@@ -46,6 +48,7 @@ public class AnswerCriteria implements Serializable, Criteria {
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.lastModifiedDate = other.lastModifiedDate == null ? null : other.lastModifiedDate.copy();
+        this.teacherId = other.teacherId == null ? null : other.teacherId.copy();
         this.questionId = other.questionId == null ? null : other.questionId.copy();
         this.distinct = other.distinct;
     }
@@ -145,6 +148,21 @@ public class AnswerCriteria implements Serializable, Criteria {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public LongFilter getTeacherId() {
+        return teacherId;
+    }
+
+    public LongFilter teacherId() {
+        if (teacherId == null) {
+            teacherId = new LongFilter();
+        }
+        return teacherId;
+    }
+
+    public void setTeacherId(LongFilter teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public LongFilter getQuestionId() {
         return questionId;
     }
@@ -184,6 +202,7 @@ public class AnswerCriteria implements Serializable, Criteria {
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(lastModifiedDate, that.lastModifiedDate) &&
+            Objects.equals(teacherId, that.teacherId) &&
             Objects.equals(questionId, that.questionId) &&
             Objects.equals(distinct, that.distinct)
         );
@@ -191,7 +210,7 @@ public class AnswerCriteria implements Serializable, Criteria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, answer, createdBy, createdDate, lastModifiedBy, lastModifiedDate, questionId, distinct);
+        return Objects.hash(id, answer, createdBy, createdDate, lastModifiedBy, lastModifiedDate, teacherId, questionId, distinct);
     }
 
     // prettier-ignore
@@ -204,6 +223,7 @@ public class AnswerCriteria implements Serializable, Criteria {
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+            (teacherId != null ? "teacherId=" + teacherId + ", " : "") +
             (questionId != null ? "questionId=" + questionId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";

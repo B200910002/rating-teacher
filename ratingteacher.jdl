@@ -94,7 +94,8 @@ entity Answer {
     createdBy String,
     createdDate Instant,
     lastModifiedBy String,
-    lastModifiedDate Instant
+    lastModifiedDate Instant,
+    teacherId Long
 }
 
 entity Schedule{

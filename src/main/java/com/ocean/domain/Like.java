@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Like.
@@ -11,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "jhi_like")
 @SuppressWarnings("common-java:DuplicatedBlocks")
+@EntityListeners(AuditingEntityListener.class)
 public class Like implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,6 +24,7 @@ public class Like implements Serializable {
     private Long id;
 
     @Column(name = "time_stamp")
+    @CreatedDate
     private Instant timeStamp;
 
     @ManyToOne

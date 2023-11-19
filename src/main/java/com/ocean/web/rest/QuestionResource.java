@@ -1,5 +1,6 @@
 package com.ocean.web.rest;
 
+import com.ocean.domain.Answer;
 import com.ocean.domain.Question;
 import com.ocean.repository.QuestionRepository;
 import com.ocean.service.QuestionQueryService;
@@ -9,9 +10,12 @@ import com.ocean.service.dto.QuestionDTO;
 import com.ocean.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -150,6 +154,29 @@ public class QuestionResource {
     public ResponseEntity<List<QuestionDTO>> getAllQuestions(QuestionCriteria criteria) {
         log.debug("REST request to get Questions by criteria: {}", criteria);
         List<QuestionDTO> entityList = questionQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    @GetMapping("/questions-with-answers")
+    public ResponseEntity<List<Question>> getAllQuestionsWithAnswers(@RequestParam(name = "teacherId", required = false) Long teacherId) {
+        log.debug("REST request to get Questions by criteria: {}");
+        List<Question> entityList = questionService.findAll();
+        entityList
+            .stream()
+            .map(question -> {
+                List<Answer> filteredAnswers = question
+                    .getAnswers()
+                    .stream()
+                    .filter(answer -> answer.getTeacherId() == teacherId)
+                    .collect(Collectors.toList());
+
+                Set<Answer> filteredAnswersSet = new HashSet<>(filteredAnswers);
+                question.setAnswers(filteredAnswersSet);
+
+                return question;
+            })
+            .collect(Collectors.toList());
+
         return ResponseEntity.ok().body(entityList);
     }
 

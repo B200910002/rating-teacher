@@ -50,6 +50,10 @@ class AnswerResourceIT {
     private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Long DEFAULT_TEACHER_ID = 1L;
+    private static final Long UPDATED_TEACHER_ID = 2L;
+    private static final Long SMALLER_TEACHER_ID = 1L - 1L;
+
     private static final String ENTITY_API_URL = "/api/answers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -82,7 +86,8 @@ class AnswerResourceIT {
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
             .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .teacherId(DEFAULT_TEACHER_ID);
         return answer;
     }
 
@@ -98,7 +103,8 @@ class AnswerResourceIT {
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .teacherId(UPDATED_TEACHER_ID);
         return answer;
     }
 
@@ -126,6 +132,7 @@ class AnswerResourceIT {
         assertThat(testAnswer.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testAnswer.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
         assertThat(testAnswer.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testAnswer.getTeacherId()).isEqualTo(DEFAULT_TEACHER_ID);
     }
 
     @Test
@@ -163,7 +170,8 @@ class AnswerResourceIT {
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].teacherId").value(hasItem(DEFAULT_TEACHER_ID.intValue())));
     }
 
     @Test
@@ -182,7 +190,8 @@ class AnswerResourceIT {
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.teacherId").value(DEFAULT_TEACHER_ID.intValue()));
     }
 
     @Test
@@ -478,6 +487,97 @@ class AnswerResourceIT {
 
     @Test
     @Transactional
+    void getAllAnswersByTeacherIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId equals to DEFAULT_TEACHER_ID
+        defaultAnswerShouldBeFound("teacherId.equals=" + DEFAULT_TEACHER_ID);
+
+        // Get all the answerList where teacherId equals to UPDATED_TEACHER_ID
+        defaultAnswerShouldNotBeFound("teacherId.equals=" + UPDATED_TEACHER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllAnswersByTeacherIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId in DEFAULT_TEACHER_ID or UPDATED_TEACHER_ID
+        defaultAnswerShouldBeFound("teacherId.in=" + DEFAULT_TEACHER_ID + "," + UPDATED_TEACHER_ID);
+
+        // Get all the answerList where teacherId equals to UPDATED_TEACHER_ID
+        defaultAnswerShouldNotBeFound("teacherId.in=" + UPDATED_TEACHER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllAnswersByTeacherIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId is not null
+        defaultAnswerShouldBeFound("teacherId.specified=true");
+
+        // Get all the answerList where teacherId is null
+        defaultAnswerShouldNotBeFound("teacherId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllAnswersByTeacherIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId is greater than or equal to DEFAULT_TEACHER_ID
+        defaultAnswerShouldBeFound("teacherId.greaterThanOrEqual=" + DEFAULT_TEACHER_ID);
+
+        // Get all the answerList where teacherId is greater than or equal to UPDATED_TEACHER_ID
+        defaultAnswerShouldNotBeFound("teacherId.greaterThanOrEqual=" + UPDATED_TEACHER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllAnswersByTeacherIdIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId is less than or equal to DEFAULT_TEACHER_ID
+        defaultAnswerShouldBeFound("teacherId.lessThanOrEqual=" + DEFAULT_TEACHER_ID);
+
+        // Get all the answerList where teacherId is less than or equal to SMALLER_TEACHER_ID
+        defaultAnswerShouldNotBeFound("teacherId.lessThanOrEqual=" + SMALLER_TEACHER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllAnswersByTeacherIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId is less than DEFAULT_TEACHER_ID
+        defaultAnswerShouldNotBeFound("teacherId.lessThan=" + DEFAULT_TEACHER_ID);
+
+        // Get all the answerList where teacherId is less than UPDATED_TEACHER_ID
+        defaultAnswerShouldBeFound("teacherId.lessThan=" + UPDATED_TEACHER_ID);
+    }
+
+    @Test
+    @Transactional
+    void getAllAnswersByTeacherIdIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where teacherId is greater than DEFAULT_TEACHER_ID
+        defaultAnswerShouldNotBeFound("teacherId.greaterThan=" + DEFAULT_TEACHER_ID);
+
+        // Get all the answerList where teacherId is greater than SMALLER_TEACHER_ID
+        defaultAnswerShouldBeFound("teacherId.greaterThan=" + SMALLER_TEACHER_ID);
+    }
+
+    @Test
+    @Transactional
     void getAllAnswersByQuestionIsEqualToSomething() throws Exception {
         Question question;
         if (TestUtil.findAll(em, Question.class).isEmpty()) {
@@ -512,7 +612,8 @@ class AnswerResourceIT {
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].teacherId").value(hasItem(DEFAULT_TEACHER_ID.intValue())));
 
         // Check, that the count call also returns 1
         restAnswerMockMvc
@@ -565,7 +666,8 @@ class AnswerResourceIT {
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .teacherId(UPDATED_TEACHER_ID);
         AnswerDTO answerDTO = answerMapper.toDto(updatedAnswer);
 
         restAnswerMockMvc
@@ -585,6 +687,7 @@ class AnswerResourceIT {
         assertThat(testAnswer.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testAnswer.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
         assertThat(testAnswer.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testAnswer.getTeacherId()).isEqualTo(UPDATED_TEACHER_ID);
     }
 
     @Test
@@ -664,7 +767,11 @@ class AnswerResourceIT {
         Answer partialUpdatedAnswer = new Answer();
         partialUpdatedAnswer.setId(answer.getId());
 
-        partialUpdatedAnswer.answer(UPDATED_ANSWER).createdBy(UPDATED_CREATED_BY).lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+        partialUpdatedAnswer
+            .answer(UPDATED_ANSWER)
+            .createdBy(UPDATED_CREATED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .teacherId(UPDATED_TEACHER_ID);
 
         restAnswerMockMvc
             .perform(
@@ -683,6 +790,7 @@ class AnswerResourceIT {
         assertThat(testAnswer.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testAnswer.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
         assertThat(testAnswer.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testAnswer.getTeacherId()).isEqualTo(UPDATED_TEACHER_ID);
     }
 
     @Test
@@ -702,7 +810,8 @@ class AnswerResourceIT {
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .teacherId(UPDATED_TEACHER_ID);
 
         restAnswerMockMvc
             .perform(
@@ -721,6 +830,7 @@ class AnswerResourceIT {
         assertThat(testAnswer.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testAnswer.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
         assertThat(testAnswer.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testAnswer.getTeacherId()).isEqualTo(UPDATED_TEACHER_ID);
     }
 
     @Test

@@ -24,6 +24,10 @@
     {
       "fieldName": "lastModifiedDate",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "teacherId",
+      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,

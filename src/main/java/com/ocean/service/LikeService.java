@@ -83,9 +83,9 @@ public class LikeService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public List<LikeDTO> findAll() {
+    public List<Like> findAll() {
         log.debug("Request to get all Likes");
-        return likeRepository.findAll().stream().map(likeMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return likeRepository.findAll();
     }
 
     /**
@@ -95,9 +95,9 @@ public class LikeService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<LikeDTO> findOne(Long id) {
+    public Optional<Like> findOne(Long id) {
         log.debug("Request to get Like : {}", id);
-        return likeRepository.findById(id).map(likeMapper::toDto);
+        return likeRepository.findById(id);
     }
 
     /**

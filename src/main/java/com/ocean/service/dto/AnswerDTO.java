@@ -22,6 +22,8 @@ public class AnswerDTO implements Serializable {
 
     private Instant lastModifiedDate;
 
+    private Long teacherId;
+
     private QuestionDTO question;
 
     public Long getId() {
@@ -72,6 +74,14 @@ public class AnswerDTO implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public QuestionDTO getQuestion() {
         return question;
     }
@@ -111,6 +121,7 @@ public class AnswerDTO implements Serializable {
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", teacherId=" + getTeacherId() +
             ", question=" + getQuestion() +
             "}";
     }

@@ -5,11 +5,11 @@ enum LoginType {
 }
 
 enum LessonType{
-	Lecture, 
-    Seminar,
-    Laboratory,
-    Practice,
-    Assignment
+	LECTURE,
+    SEMINAR,
+    LABORATORY,
+    PRACTICE,
+    ASSIGNMENT
 }
 
 enum WeekDay{

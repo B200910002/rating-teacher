@@ -8,6 +8,7 @@ import com.ocean.repository.UserRepository;
 import com.ocean.security.AuthoritiesConstants;
 import com.ocean.security.SecurityUtils;
 import com.ocean.service.dto.AdminUserDTO;
+import com.ocean.service.dto.StudentDTO;
 import com.ocean.service.dto.UserDTO;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -15,6 +16,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -37,6 +39,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
+
+    @Autowired
+    private StudentService studentService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
@@ -118,8 +123,17 @@ public class UserService {
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+        StudentDTO newStudent = createStudent(userDTO);
         log.debug("Created Information for User: {}", newUser);
+        log.debug("Created Information for Student: {}", newStudent);
         return newUser;
+    }
+
+    private StudentDTO createStudent(AdminUserDTO userDTO) {
+        StudentDTO student = new StudentDTO();
+        student.setEmail(userDTO.getEmail());
+        student.setStudentCode(userDTO.getLogin());
+        return studentService.save(student);
     }
 
     private boolean removeNonActivatedUser(User existingUser) {
@@ -161,7 +175,9 @@ public class UserService {
             user.setAuthorities(authorities);
         }
         userRepository.save(user);
+        StudentDTO newStudent = createStudent(userDTO);
         log.debug("Created Information for User: {}", user);
+        log.debug("Created Information for Student: {}", newStudent);
         return user;
     }
 

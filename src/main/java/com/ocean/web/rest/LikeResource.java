@@ -66,7 +66,6 @@ public class LikeResource {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
             Optional<StudentDTO> student = studentService.findOneByStudentCode(currentUserLogin.get());
-            System.out.println("pezda: " + student);
             if (student.isPresent()) {
                 likeDTO.setStudent(student.get());
             }

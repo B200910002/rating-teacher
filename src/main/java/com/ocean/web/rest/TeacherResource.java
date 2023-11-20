@@ -173,6 +173,25 @@ public class TeacherResource {
         return ResponseUtil.wrapOrNotFound(teacherDTO);
     }
 
+    @GetMapping("/teacher-by")
+    public ResponseEntity<List<TeacherDTO>> getTeacher(
+        @RequestParam(name = "teacherCode", required = false) String teacherCode,
+        @RequestParam(name = "teacherName", required = false) String teacherName
+    ) {
+        log.debug("REST request to get Teacher by Code: {} or Name: {}", teacherCode, teacherName);
+
+        Optional<List<TeacherDTO>> teacherDTO = Optional.empty();
+        if (teacherCode != null && teacherName != null) {
+            teacherDTO = teacherService.findByCodeAndName(teacherCode, teacherName);
+        } else if (teacherCode != null) {
+            teacherDTO = teacherService.findByCode(teacherCode);
+        } else if (teacherName != null) {
+            teacherDTO = teacherService.findByName(teacherName);
+        }
+
+        return ResponseUtil.wrapOrNotFound(teacherDTO);
+    }
+
     /**
      * {@code DELETE  /teachers/:id} : delete the "id" teacher.
      *

@@ -40,8 +40,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ScheduleResourceIT {
 
-    private static final LessonType DEFAULT_LESSON_TYPE = LessonType.Lecture;
-    private static final LessonType UPDATED_LESSON_TYPE = LessonType.Seminar;
+    private static final LessonType DEFAULT_LESSON_TYPE = LessonType.LECTURE;
+    private static final LessonType UPDATED_LESSON_TYPE = LessonType.SEMINAR;
 
     private static final WeekDay DEFAULT_WEEK_DAY = WeekDay.MONDAY;
     private static final WeekDay UPDATED_WEEK_DAY = WeekDay.TUESDAY;

@@ -1,5 +1,6 @@
 package com.ocean.service;
 
+import com.ocean.config.Constants;
 import com.ocean.domain.User;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
@@ -83,7 +84,7 @@ public class MailService {
             log.debug("Email doesn't exist for user '{}'", user.getLogin());
             return;
         }
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.forLanguageTag(Constants.DEFAULT_LANGUAGE);
         Context context = new Context(locale);
         context.setVariable(USER, user);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
@@ -94,19 +95,6 @@ public class MailService {
 
     @Async
     public void sendActivationEmail(User user) {
-        if (user == null || user.getEmail() == null) {
-            log.debug("User or user email is null. Cannot send activation email.");
-            return;
-        }
-
-        String langKey = user.getLangKey();
-        if (langKey == null) {
-            log.debug("Language key is null for user '{}'. Cannot determine locale.", user.getLogin());
-            // Provide a default locale or skip sending the email
-            return;
-        }
-
-        Locale locale = Locale.forLanguageTag(langKey);
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
     }

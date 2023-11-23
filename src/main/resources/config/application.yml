@@ -160,7 +160,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-    locale: mn
   task:
     execution:
       thread-name-prefix: ratingteacher-task-

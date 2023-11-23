@@ -9,7 +9,7 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       # - MYSQL_DATABASE=ratingteacher
-      - MYSQL_DATABASE=jupup7ambelwoqw8
+      - MYSQL_DATABASE=he3c0b1zqkytxmnh
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:

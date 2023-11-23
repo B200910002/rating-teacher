@@ -815,10 +815,10 @@
                                 <!-- <defaultSchemaName>ratingteacher</defaultSchemaName> -->
                                 <!-- <username>root</username>
                                 <password></password> -->
-                                <url>jdbc:mysql://x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/jupup7ambelwoqw8</url>
-                                <defaultSchemaName>jupup7ambelwoqw8</defaultSchemaName>
-                                <username>m9vkucetqpvjjy1q</username>
-                                <password>et98zsolfmt0l6e2</password>
+                                <url>jdbc:mysql://y5svr1t2r5xudqeq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/he3c0b1zqkytxmnh</url>
+                                <defaultSchemaName>he3c0b1zqkytxmnh</defaultSchemaName>
+                                <username>r5d4ibg0vlsthlod</username>
+                                <password>ays05p829sulo2bz</password>
                                 <referenceUrl>hibernate:spring:com.ocean.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>
@@ -914,10 +914,10 @@
                                 <defaultSchemaName>ratingteacher</defaultSchemaName> -->
                                 <!-- <username>root</username>
                                 <password></password> -->
-                                <url>jdbc:mysql://x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/jupup7ambelwoqw8</url>
-                                <defaultSchemaName>jupup7ambelwoqw8</defaultSchemaName>
-                                <username>m9vkucetqpvjjy1q</username>
-                                <password>et98zsolfmt0l6e2</password>
+                                <url>jdbc:mysql://y5svr1t2r5xudqeq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/he3c0b1zqkytxmnh</url>
+                                <defaultSchemaName>he3c0b1zqkytxmnh</defaultSchemaName>
+                                <username>r5d4ibg0vlsthlod</username>
+                                <password>ays05p829sulo2bz</password>
                                 <referenceUrl>hibernate:spring:com.ocean.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>

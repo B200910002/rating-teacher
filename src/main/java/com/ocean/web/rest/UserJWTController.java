@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller to authenticate users.
  */
-@CrossOrigin(origins = "http://localhost:3032")
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {

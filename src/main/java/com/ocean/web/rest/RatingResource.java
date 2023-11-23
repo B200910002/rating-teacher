@@ -2,10 +2,13 @@ package com.ocean.web.rest;
 
 import com.ocean.domain.Rating;
 import com.ocean.repository.RatingRepository;
+import com.ocean.security.SecurityUtils;
 import com.ocean.service.RatingQueryService;
 import com.ocean.service.RatingService;
+import com.ocean.service.StudentService;
 import com.ocean.service.criteria.RatingCriteria;
 import com.ocean.service.dto.RatingDTO;
+import com.ocean.service.dto.StudentDTO;
 import com.ocean.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,6 +22,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +44,9 @@ public class RatingResource {
     private String applicationName;
 
     private final RatingService ratingService;
+
+    @Autowired
+    StudentService studentService;
 
     private final RatingRepository ratingRepository;
 
@@ -64,6 +71,15 @@ public class RatingResource {
         if (ratingDTO.getId() != null) {
             throw new BadRequestAlertException("A new rating cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        if (currentUserLogin.isPresent()) {
+            Optional<StudentDTO> student = studentService.findOneByStudentCode(currentUserLogin.get());
+            if (student.isPresent()) {
+                ratingDTO.setStudent(student.get());
+            }
+        }
+
         RatingDTO result = ratingService.save(ratingDTO);
         return ResponseEntity
             .created(new URI("/api/ratings/" + result.getId()))

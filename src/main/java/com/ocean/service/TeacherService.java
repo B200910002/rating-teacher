@@ -100,6 +100,24 @@ public class TeacherService {
         return teacherRepository.findById(id).map(teacherMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<List<TeacherDTO>> findByCode(String teacherCode) {
+        log.debug("Request to get Teacher : {}", teacherCode);
+        return teacherRepository.findByTeacherCode(teacherCode).map(teacherMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<List<TeacherDTO>> findByName(String teacherName) {
+        log.debug("Request to get Teacher : {}", teacherName);
+        return teacherRepository.findByFirstName(teacherName).map(teacherMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<List<TeacherDTO>> findByCodeAndName(String teacherCode, String teacherName) {
+        log.debug("REST request to get Teacher by Code: {} or Name: {}", teacherCode, teacherName);
+        return teacherRepository.findByTeacherCodeAndFirstName(teacherCode, teacherName).map(teacherMapper::toDto);
+    }
+
     /**
      * Delete the teacher by id.
      *

@@ -94,10 +94,6 @@ public class MailService {
 
     @Async
     public void sendActivationEmail(User user) {
-        if (user == null || user.getEmail() == null) {
-            log.debug("User or user email is null. Cannot send activation email.");
-            return;
-        }
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
     }

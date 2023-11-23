@@ -32,6 +32,7 @@ public class UserJWTController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

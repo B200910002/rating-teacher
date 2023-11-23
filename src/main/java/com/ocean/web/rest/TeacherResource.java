@@ -54,6 +54,7 @@ public class TeacherResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new teacherDTO, or with status {@code 400 (Bad Request)} if the teacher has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/teachers")
     public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) throws URISyntaxException {
         log.debug("REST request to save Teacher : {}", teacherDTO);
@@ -77,6 +78,7 @@ public class TeacherResource {
      * or with status {@code 500 (Internal Server Error)} if the teacherDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PutMapping("/teachers/{id}")
     public ResponseEntity<TeacherDTO> updateTeacher(
         @PathVariable(value = "id", required = false) final Long id,
@@ -112,6 +114,7 @@ public class TeacherResource {
      * or with status {@code 500 (Internal Server Error)} if the teacherDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/teachers/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<TeacherDTO> partialUpdateTeacher(
         @PathVariable(value = "id", required = false) final Long id,
@@ -143,6 +146,7 @@ public class TeacherResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of teachers in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/teachers")
     public ResponseEntity<List<TeacherDTO>> getAllTeachers(TeacherCriteria criteria) {
         log.debug("REST request to get Teachers by criteria: {}", criteria);
@@ -156,6 +160,7 @@ public class TeacherResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/teachers/count")
     public ResponseEntity<Long> countTeachers(TeacherCriteria criteria) {
         log.debug("REST request to count Teachers by criteria: {}", criteria);
@@ -168,6 +173,7 @@ public class TeacherResource {
      * @param id the id of the teacherDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the teacherDTO, or with status {@code 404 (Not Found)}.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/teachers/{id}")
     public ResponseEntity<TeacherDTO> getTeacher(@PathVariable Long id) {
         log.debug("REST request to get Teacher : {}", id);
@@ -175,6 +181,7 @@ public class TeacherResource {
         return ResponseUtil.wrapOrNotFound(teacherDTO);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/teacher-by")
     public ResponseEntity<List<TeacherDTO>> getTeacher(
         @RequestParam(name = "teacherCode", required = false) String teacherCode,
@@ -200,6 +207,7 @@ public class TeacherResource {
      * @param id the id of the teacherDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/teachers/{id}")
     public ResponseEntity<Void> deleteTeacher(@PathVariable Long id) {
         log.debug("REST request to delete Teacher : {}", id);

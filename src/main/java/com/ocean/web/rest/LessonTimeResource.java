@@ -58,6 +58,7 @@ public class LessonTimeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new lessonTimeDTO, or with status {@code 400 (Bad Request)} if the lessonTime has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/lesson-times")
     public ResponseEntity<LessonTimeDTO> createLessonTime(@RequestBody LessonTimeDTO lessonTimeDTO) throws URISyntaxException {
         log.debug("REST request to save LessonTime : {}", lessonTimeDTO);
@@ -81,6 +82,7 @@ public class LessonTimeResource {
      * or with status {@code 500 (Internal Server Error)} if the lessonTimeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PutMapping("/lesson-times/{id}")
     public ResponseEntity<LessonTimeDTO> updateLessonTime(
         @PathVariable(value = "id", required = false) final Long id,
@@ -116,6 +118,7 @@ public class LessonTimeResource {
      * or with status {@code 500 (Internal Server Error)} if the lessonTimeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/lesson-times/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<LessonTimeDTO> partialUpdateLessonTime(
         @PathVariable(value = "id", required = false) final Long id,
@@ -147,6 +150,7 @@ public class LessonTimeResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of lessonTimes in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/lesson-times")
     public ResponseEntity<List<LessonTimeDTO>> getAllLessonTimes(LessonTimeCriteria criteria) {
         log.debug("REST request to get LessonTimes by criteria: {}", criteria);
@@ -160,6 +164,7 @@ public class LessonTimeResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/lesson-times/count")
     public ResponseEntity<Long> countLessonTimes(LessonTimeCriteria criteria) {
         log.debug("REST request to count LessonTimes by criteria: {}", criteria);
@@ -172,6 +177,7 @@ public class LessonTimeResource {
      * @param id the id of the lessonTimeDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the lessonTimeDTO, or with status {@code 404 (Not Found)}.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/lesson-times/{id}")
     public ResponseEntity<LessonTimeDTO> getLessonTime(@PathVariable Long id) {
         log.debug("REST request to get LessonTime : {}", id);
@@ -185,6 +191,7 @@ public class LessonTimeResource {
      * @param id the id of the lessonTimeDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/lesson-times/{id}")
     public ResponseEntity<Void> deleteLessonTime(@PathVariable Long id) {
         log.debug("REST request to delete LessonTime : {}", id);

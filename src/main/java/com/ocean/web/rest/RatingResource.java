@@ -67,6 +67,7 @@ public class RatingResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new ratingDTO, or with status {@code 400 (Bad Request)} if the rating has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/ratings")
     public ResponseEntity<RatingDTO> createRating(@Valid @RequestBody RatingDTO ratingDTO) throws URISyntaxException {
         log.debug("REST request to save Rating : {}", ratingDTO);
@@ -99,6 +100,7 @@ public class RatingResource {
      * or with status {@code 500 (Internal Server Error)} if the ratingDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PutMapping("/ratings/{id}")
     public ResponseEntity<RatingDTO> updateRating(
         @PathVariable(value = "id", required = false) final Long id,
@@ -134,6 +136,7 @@ public class RatingResource {
      * or with status {@code 500 (Internal Server Error)} if the ratingDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/ratings/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<RatingDTO> partialUpdateRating(
         @PathVariable(value = "id", required = false) final Long id,
@@ -165,6 +168,7 @@ public class RatingResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ratings in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/ratings")
     public ResponseEntity<List<Rating>> getAllRatings(@RequestParam(name = "teacherId", required = false) Long teacherId) {
         log.debug("REST request to get Ratings by criteria: {}");
@@ -193,6 +197,7 @@ public class RatingResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/ratings/count")
     public ResponseEntity<Long> countRatings(RatingCriteria criteria) {
         log.debug("REST request to count Ratings by criteria: {}", criteria);
@@ -205,6 +210,7 @@ public class RatingResource {
      * @param id the id of the ratingDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the ratingDTO, or with status {@code 404 (Not Found)}.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/ratings/{id}")
     public ResponseEntity<Rating> getRating(@PathVariable Long id) {
         log.debug("REST request to get Rating : {}", id);
@@ -218,6 +224,7 @@ public class RatingResource {
      * @param id the id of the ratingDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/ratings/{id}")
     public ResponseEntity<Void> deleteRating(@PathVariable Long id) {
         log.debug("REST request to delete Rating : {}", id);

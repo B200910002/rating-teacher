@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.PaginationUtil;
 
+@CrossOrigin(origins = "http://localhost:3032")
 @RestController
 @RequestMapping("/api")
 public class PublicUserResource {

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * REST controller for managing the current user's account.
  */
+@CrossOrigin(origins = "http://localhost:3032")
 @RestController
 @RequestMapping("/api")
 public class AccountResource {

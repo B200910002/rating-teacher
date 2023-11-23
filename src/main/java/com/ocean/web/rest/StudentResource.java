@@ -22,6 +22,7 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Student}.
  */
+@CrossOrigin(origins = "http://localhost:3032")
 @RestController
 @RequestMapping("/api")
 public class StudentResource {

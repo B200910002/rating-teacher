@@ -27,8 +27,6 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Like}.
  */
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class LikeResource {
@@ -62,7 +60,6 @@ public class LikeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new likeDTO, or with status {@code 400 (Bad Request)} if the like has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/likes")
     public ResponseEntity<LikeDTO> createLike(@RequestBody LikeDTO likeDTO) throws URISyntaxException {
         log.debug("REST request to save Like : {}", likeDTO);
@@ -94,7 +91,6 @@ public class LikeResource {
      * or with status {@code 500 (Internal Server Error)} if the likeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/likes/{id}")
     public ResponseEntity<LikeDTO> updateLike(@PathVariable(value = "id", required = false) final Long id, @RequestBody LikeDTO likeDTO)
         throws URISyntaxException {
@@ -128,7 +124,6 @@ public class LikeResource {
      * or with status {@code 500 (Internal Server Error)} if the likeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/likes/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<LikeDTO> partialUpdateLike(
         @PathVariable(value = "id", required = false) final Long id,
@@ -160,7 +155,6 @@ public class LikeResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of likes in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/likes")
     public ResponseEntity<List<Like>> getAllLikes(LikeCriteria criteria) {
         log.debug("REST request to get Likes by criteria: {}", criteria);
@@ -174,7 +168,6 @@ public class LikeResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/likes/count")
     public ResponseEntity<Long> countLikes(LikeCriteria criteria) {
         log.debug("REST request to count Likes by criteria: {}", criteria);
@@ -187,7 +180,6 @@ public class LikeResource {
      * @param id the id of the likeDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the likeDTO, or with status {@code 404 (Not Found)}.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/likes/{id}")
     public ResponseEntity<Like> getLike(@PathVariable Long id) {
         log.debug("REST request to get Like : {}", id);
@@ -201,7 +193,6 @@ public class LikeResource {
      * @param id the id of the likeDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/likes/{id}")
     public ResponseEntity<Void> deleteLike(@PathVariable Long id) {
         log.debug("REST request to delete Like : {}", id);

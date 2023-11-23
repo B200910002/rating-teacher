@@ -23,8 +23,6 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Schedule}.
  */
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class ScheduleResource {
@@ -59,7 +57,6 @@ public class ScheduleResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new scheduleDTO, or with status {@code 400 (Bad Request)} if the schedule has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/schedules")
     public ResponseEntity<ScheduleDTO> createSchedule(@RequestBody ScheduleDTO scheduleDTO) throws URISyntaxException {
         log.debug("REST request to save Schedule : {}", scheduleDTO);
@@ -83,7 +80,6 @@ public class ScheduleResource {
      * or with status {@code 500 (Internal Server Error)} if the scheduleDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/schedules/{id}")
     public ResponseEntity<ScheduleDTO> updateSchedule(
         @PathVariable(value = "id", required = false) final Long id,
@@ -119,7 +115,6 @@ public class ScheduleResource {
      * or with status {@code 500 (Internal Server Error)} if the scheduleDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/schedules/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ScheduleDTO> partialUpdateSchedule(
         @PathVariable(value = "id", required = false) final Long id,
@@ -151,7 +146,6 @@ public class ScheduleResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of schedules in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/schedules")
     public ResponseEntity<List<Schedule>> getAllSchedules() {
         log.debug("REST request to get Schedules by criteria: {}");
@@ -165,7 +159,6 @@ public class ScheduleResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/schedules/count")
     public ResponseEntity<Long> countSchedules(ScheduleCriteria criteria) {
         log.debug("REST request to count Schedules by criteria: {}", criteria);
@@ -178,7 +171,6 @@ public class ScheduleResource {
      * @param id the id of the scheduleDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the scheduleDTO, or with status {@code 404 (Not Found)}.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/schedules/{id}")
     public ResponseEntity<Schedule> getSchedule(@PathVariable Long id) {
         log.debug("REST request to get Schedule : {}", id);
@@ -192,7 +184,6 @@ public class ScheduleResource {
      * @param id the id of the scheduleDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/schedules/{id}")
     public ResponseEntity<Void> deleteSchedule(@PathVariable Long id) {
         log.debug("REST request to delete Schedule : {}", id);

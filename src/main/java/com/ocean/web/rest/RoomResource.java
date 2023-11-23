@@ -22,8 +22,6 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Room}.
  */
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class RoomResource {
@@ -54,7 +52,6 @@ public class RoomResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new roomDTO, or with status {@code 400 (Bad Request)} if the room has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/rooms")
     public ResponseEntity<RoomDTO> createRoom(@RequestBody RoomDTO roomDTO) throws URISyntaxException {
         log.debug("REST request to save Room : {}", roomDTO);
@@ -78,7 +75,6 @@ public class RoomResource {
      * or with status {@code 500 (Internal Server Error)} if the roomDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/rooms/{id}")
     public ResponseEntity<RoomDTO> updateRoom(@PathVariable(value = "id", required = false) final Long id, @RequestBody RoomDTO roomDTO)
         throws URISyntaxException {
@@ -112,7 +108,6 @@ public class RoomResource {
      * or with status {@code 500 (Internal Server Error)} if the roomDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/rooms/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<RoomDTO> partialUpdateRoom(
         @PathVariable(value = "id", required = false) final Long id,
@@ -144,7 +139,6 @@ public class RoomResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rooms in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/rooms")
     public ResponseEntity<List<RoomDTO>> getAllRooms(RoomCriteria criteria) {
         log.debug("REST request to get Rooms by criteria: {}", criteria);
@@ -158,7 +152,6 @@ public class RoomResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/rooms/count")
     public ResponseEntity<Long> countRooms(RoomCriteria criteria) {
         log.debug("REST request to count Rooms by criteria: {}", criteria);
@@ -171,7 +164,6 @@ public class RoomResource {
      * @param id the id of the roomDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the roomDTO, or with status {@code 404 (Not Found)}.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/rooms/{id}")
     public ResponseEntity<RoomDTO> getRoom(@PathVariable Long id) {
         log.debug("REST request to get Room : {}", id);
@@ -185,7 +177,6 @@ public class RoomResource {
      * @param id the id of the roomDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/rooms/{id}")
     public ResponseEntity<Void> deleteRoom(@PathVariable Long id) {
         log.debug("REST request to delete Room : {}", id);

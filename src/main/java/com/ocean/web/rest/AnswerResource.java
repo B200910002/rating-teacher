@@ -23,8 +23,6 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Answer}.
  */
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class AnswerResource {
@@ -55,7 +53,6 @@ public class AnswerResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new answerDTO, or with status {@code 400 (Bad Request)} if the answer has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/answers")
     public ResponseEntity<AnswerDTO> createAnswer(@RequestBody AnswerDTO answerDTO) throws URISyntaxException {
         log.debug("REST request to save Answer : {}", answerDTO);
@@ -79,7 +76,6 @@ public class AnswerResource {
      * or with status {@code 500 (Internal Server Error)} if the answerDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/answers/{id}")
     public ResponseEntity<AnswerDTO> updateAnswer(
         @PathVariable(value = "id", required = false) final Long id,
@@ -115,7 +111,6 @@ public class AnswerResource {
      * or with status {@code 500 (Internal Server Error)} if the answerDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/answers/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<AnswerDTO> partialUpdateAnswer(
         @PathVariable(value = "id", required = false) final Long id,
@@ -147,7 +142,6 @@ public class AnswerResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of answers in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/answers")
     public ResponseEntity<List<AnswerDTO>> getAllAnswers(AnswerCriteria criteria) {
         log.debug("REST request to get Answers by criteria: {}", criteria);
@@ -161,7 +155,6 @@ public class AnswerResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/answers/count")
     public ResponseEntity<Long> countAnswers(AnswerCriteria criteria) {
         log.debug("REST request to count Answers by criteria: {}", criteria);
@@ -174,7 +167,6 @@ public class AnswerResource {
      * @param id the id of the answerDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answerDTO, or with status {@code 404 (Not Found)}.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/answers/{id}")
     public ResponseEntity<Answer> getAnswer(@PathVariable Long id) {
         log.debug("REST request to get Answer : {}", id);
@@ -188,7 +180,6 @@ public class AnswerResource {
      * @param id the id of the answerDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/answers/{id}")
     public ResponseEntity<Void> deleteAnswer(@PathVariable Long id) {
         log.debug("REST request to delete Answer : {}", id);

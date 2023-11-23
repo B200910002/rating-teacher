@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller to authenticate users.
  */
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {
@@ -32,7 +30,6 @@ public class UserJWTController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

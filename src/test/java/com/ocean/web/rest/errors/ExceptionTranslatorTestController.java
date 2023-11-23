@@ -12,43 +12,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/exception-translator-test")
 public class ExceptionTranslatorTestController {
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/concurrency-failure")
     public void concurrencyFailure() {
         throw new ConcurrencyFailureException("test concurrency failure");
     }
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/method-argument")
     public void methodArgument(@Valid @RequestBody TestDTO testDTO) {}
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/missing-servlet-request-part")
     public void missingServletRequestPartException(@RequestPart String part) {}
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/missing-servlet-request-parameter")
     public void missingServletRequestParameterException(@RequestParam String param) {}
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/access-denied")
     public void accessdenied() {
         throw new AccessDeniedException("test access denied!");
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/unauthorized")
     public void unauthorized() {
         throw new BadCredentialsException("test authentication failed!");
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/response-status")
     public void exceptionWithResponseStatus() {
         throw new TestResponseStatusException();
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/internal-server-error")
     public void internalServerError() {
         throw new RuntimeException();

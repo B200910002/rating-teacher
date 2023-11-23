@@ -94,6 +94,19 @@ public class MailService {
 
     @Async
     public void sendActivationEmail(User user) {
+        if (user == null || user.getEmail() == null) {
+            log.debug("User or user email is null. Cannot send activation email.");
+            return;
+        }
+
+        String langKey = user.getLangKey();
+        if (langKey == null) {
+            log.debug("Language key is null for user '{}'. Cannot determine locale.", user.getLogin());
+            // Provide a default locale or skip sending the email
+            return;
+        }
+
+        Locale locale = Locale.forLanguageTag(langKey);
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
     }

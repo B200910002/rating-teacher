@@ -22,6 +22,7 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Lesson}.
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class LessonResource {
@@ -52,6 +53,7 @@ public class LessonResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new lessonDTO, or with status {@code 400 (Bad Request)} if the lesson has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/lessons")
     public ResponseEntity<LessonDTO> createLesson(@RequestBody LessonDTO lessonDTO) throws URISyntaxException {
         log.debug("REST request to save Lesson : {}", lessonDTO);
@@ -75,6 +77,7 @@ public class LessonResource {
      * or with status {@code 500 (Internal Server Error)} if the lessonDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PutMapping("/lessons/{id}")
     public ResponseEntity<LessonDTO> updateLesson(
         @PathVariable(value = "id", required = false) final Long id,
@@ -110,6 +113,7 @@ public class LessonResource {
      * or with status {@code 500 (Internal Server Error)} if the lessonDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/lessons/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<LessonDTO> partialUpdateLesson(
         @PathVariable(value = "id", required = false) final Long id,
@@ -141,6 +145,7 @@ public class LessonResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of lessons in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/lessons")
     public ResponseEntity<List<LessonDTO>> getAllLessons(LessonCriteria criteria) {
         log.debug("REST request to get Lessons by criteria: {}", criteria);
@@ -154,6 +159,7 @@ public class LessonResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/lessons/count")
     public ResponseEntity<Long> countLessons(LessonCriteria criteria) {
         log.debug("REST request to count Lessons by criteria: {}", criteria);
@@ -166,6 +172,7 @@ public class LessonResource {
      * @param id the id of the lessonDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the lessonDTO, or with status {@code 404 (Not Found)}.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/lessons/{id}")
     public ResponseEntity<LessonDTO> getLesson(@PathVariable Long id) {
         log.debug("REST request to get Lesson : {}", id);
@@ -179,6 +186,7 @@ public class LessonResource {
      * @param id the id of the lessonDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/lessons/{id}")
     public ResponseEntity<Void> deleteLesson(@PathVariable Long id) {
         log.debug("REST request to delete Lesson : {}", id);

@@ -27,6 +27,7 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Question}.
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class QuestionResource {
@@ -61,6 +62,7 @@ public class QuestionResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new questionDTO, or with status {@code 400 (Bad Request)} if the question has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/questions")
     public ResponseEntity<QuestionDTO> createQuestion(@RequestBody QuestionDTO questionDTO) throws URISyntaxException {
         log.debug("REST request to save Question : {}", questionDTO);
@@ -84,6 +86,7 @@ public class QuestionResource {
      * or with status {@code 500 (Internal Server Error)} if the questionDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PutMapping("/questions/{id}")
     public ResponseEntity<QuestionDTO> updateQuestion(
         @PathVariable(value = "id", required = false) final Long id,
@@ -119,6 +122,7 @@ public class QuestionResource {
      * or with status {@code 500 (Internal Server Error)} if the questionDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/questions/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<QuestionDTO> partialUpdateQuestion(
         @PathVariable(value = "id", required = false) final Long id,
@@ -150,6 +154,7 @@ public class QuestionResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of questions in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/questions")
     public ResponseEntity<List<QuestionDTO>> getAllQuestions(QuestionCriteria criteria) {
         log.debug("REST request to get Questions by criteria: {}", criteria);
@@ -157,6 +162,7 @@ public class QuestionResource {
         return ResponseEntity.ok().body(entityList);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/questions-with-answers")
     public ResponseEntity<List<Question>> getAllQuestionsWithAnswers(@RequestParam(name = "teacherId", required = false) Long teacherId) {
         log.debug("REST request to get Questions by criteria: {}");
@@ -186,6 +192,7 @@ public class QuestionResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/questions/count")
     public ResponseEntity<Long> countQuestions(QuestionCriteria criteria) {
         log.debug("REST request to count Questions by criteria: {}", criteria);
@@ -198,6 +205,7 @@ public class QuestionResource {
      * @param id the id of the questionDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the questionDTO, or with status {@code 404 (Not Found)}.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/questions/{id}")
     public ResponseEntity<Question> getQuestion(@PathVariable Long id) {
         log.debug("REST request to get Question : {}", id);
@@ -211,6 +219,7 @@ public class QuestionResource {
      * @param id the id of the questionDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/questions/{id}")
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
         log.debug("REST request to delete Question : {}", id);

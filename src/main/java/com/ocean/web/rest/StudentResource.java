@@ -22,6 +22,7 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.ocean.domain.Student}.
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class StudentResource {
@@ -52,6 +53,7 @@ public class StudentResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new studentDTO, or with status {@code 400 (Bad Request)} if the student has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/students")
     public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO) throws URISyntaxException {
         log.debug("REST request to save Student : {}", studentDTO);
@@ -75,6 +77,7 @@ public class StudentResource {
      * or with status {@code 500 (Internal Server Error)} if the studentDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PutMapping("/students/{id}")
     public ResponseEntity<StudentDTO> updateStudent(
         @PathVariable(value = "id", required = false) final Long id,
@@ -110,6 +113,7 @@ public class StudentResource {
      * or with status {@code 500 (Internal Server Error)} if the studentDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping(value = "/students/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<StudentDTO> partialUpdateStudent(
         @PathVariable(value = "id", required = false) final Long id,
@@ -141,6 +145,7 @@ public class StudentResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of students in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/students")
     public ResponseEntity<List<StudentDTO>> getAllStudents(StudentCriteria criteria) {
         log.debug("REST request to get Students by criteria: {}", criteria);
@@ -154,6 +159,7 @@ public class StudentResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/students/count")
     public ResponseEntity<Long> countStudents(StudentCriteria criteria) {
         log.debug("REST request to count Students by criteria: {}", criteria);
@@ -166,6 +172,7 @@ public class StudentResource {
      * @param id the id of the studentDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the studentDTO, or with status {@code 404 (Not Found)}.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/students/{id}")
     public ResponseEntity<StudentDTO> getStudent(@PathVariable Long id) {
         log.debug("REST request to get Student : {}", id);
@@ -179,6 +186,7 @@ public class StudentResource {
      * @param id the id of the studentDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         log.debug("REST request to delete Student : {}", id);

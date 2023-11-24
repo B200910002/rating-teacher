@@ -72,9 +72,9 @@ spring:
     contexts: prod
   mail:
     host: smtp.gmail.com
-    port: 587
-    username: oceanocean984@gmail.com
-    password: fwhgyankbjlsinnz
+    port: 465
+    username: noreplyeducenter@gmail.com
+    password: acluhadknceobfnr
     properties:
       mail:
         smtp:

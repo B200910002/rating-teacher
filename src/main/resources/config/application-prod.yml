@@ -72,7 +72,7 @@ spring:
     contexts: prod
   mail:
     host: smtp.gmail.com
-    port: 465
+    port: 587
     username: noreplyeducenter@gmail.com
     password: acluhadknceobfnr
     properties:

@@ -62,7 +62,7 @@ public class UserJWTController {
     public ResponseEntity<?> getAuthInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName(); // Assuming username is the student code
-        ResponseEntity.ok(username);
+        return new ResponseEntity<>(username, httpHeaders, HttpStatus.OK);
         // // Fetch student info based on username (student code)
         // Optional<StudentDTO> studentDTO = studentService.findOneByStudentCode(username);
 

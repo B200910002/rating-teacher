@@ -62,21 +62,20 @@ public class UserJWTController {
     public ResponseEntity<?> getAuthInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName(); // Assuming username is the student code
-        HttpHeaders httpHeaders = new HttpHeaders();
-        return new ResponseEntity<>(username, httpHeaders, HttpStatus.OK);
-        // // Fetch student info based on username (student code)
-        // Optional<StudentDTO> studentDTO = studentService.findOneByStudentCode(username);
 
-        // if (studentDTO.isPresent()) {
-        //     // Assuming the token is still valid and you have access to it
-        //     String token = ""; // Extract the token from the SecurityContext or Authentication object
+        // Fetch student info based on username (student code)
+        Optional<StudentDTO> studentDTO = studentService.findOneByStudentCode(username);
 
-        //     // Create a response object containing student info and token
-        //     AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
-        //     return ResponseEntity.ok(response);
-        // } else {
-        //     return ResponseEntity.notFound().build();
-        // }
+        if (studentDTO.isPresent()) {
+            // Assuming the token is still valid and you have access to it
+            String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : authorizationHeader;
+
+            // Create a response object containing student info and token
+            AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Class for response

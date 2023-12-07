@@ -57,7 +57,8 @@ public class UserJWTController {
         return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
     }
 
-    @GetMapping("/get_auth_info")
+    @CrossOrigin(origins = "*")
+    @PostMapping("/get_auth_info")
     public ResponseEntity<?> getAuthInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName(); // Assuming username is the student code

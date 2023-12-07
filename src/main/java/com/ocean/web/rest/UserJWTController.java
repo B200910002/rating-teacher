@@ -65,19 +65,15 @@ public class UserJWTController {
 
         // Fetch student info based on username (student code)
         Optional<StudentDTO> studentDTO = studentService.findOneByStudentCode(username);
-        return new ResponseEntity<>(studentDTO, httpHeaders, HttpStatus.OK);
 
         if (studentDTO.isPresent()) {
-            // Assuming the token is still valid and you have access to it
             String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : authorizationHeader;
-            HttpHeaders httpHeaders = new HttpHeaders();
-
-            return new ResponseEntity<>(authorizationHeader, httpHeaders, HttpStatus.OK);
-            // // Create a response object containing student info and token
-            // AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
-            // return ResponseEntity.ok(response);
+            AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.notFound().build();
+            // Create a custom message to indicate student not found
+            String message = "Student with code " + username + " not found.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
         }
     }
 

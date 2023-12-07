@@ -71,7 +71,7 @@ public class UserJWTController {
             String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : authorizationHeader;
             HttpHeaders httpHeaders = new HttpHeaders();
 
-            return new ResponseEntity<>(token, httpHeaders, HttpStatus.OK);
+            return new ResponseEntity<>(authorizationHeader, httpHeaders, HttpStatus.OK);
             // // Create a response object containing student info and token
             // AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
             // return ResponseEntity.ok(response);

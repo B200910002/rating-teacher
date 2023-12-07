@@ -59,7 +59,7 @@ public class UserJWTController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/get_auth_info")
-    public ResponseEntity<?> getAuthInfo() {
+    public ResponseEntity<?> getAuthInfo(@RequestHeader("Authorization") String authorizationHeader) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName(); // Assuming username is the student code
 

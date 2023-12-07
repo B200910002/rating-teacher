@@ -69,10 +69,12 @@ public class UserJWTController {
         if (studentDTO.isPresent()) {
             // Assuming the token is still valid and you have access to it
             String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : authorizationHeader;
+            HttpHeaders httpHeaders = new HttpHeaders();
 
-            // Create a response object containing student info and token
-            AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
-            return ResponseEntity.ok(response);
+            return new ResponseEntity<>(token, httpHeaders, HttpStatus.OK);
+            // // Create a response object containing student info and token
+            // AuthInfoResponse response = new AuthInfoResponse(studentDTO.get(), token);
+            // return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.notFound().build();
         }

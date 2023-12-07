@@ -1,8 +1,10 @@
 package com.ocean.service.dto;
 
 import com.ocean.domain.enumeration.JobPosition;
+import com.ocean.service.dto.RatingDTO;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,6 +34,10 @@ public class TeacherDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    private List<RatingDTO> ratings;
+
+    private int ratingCount;
 
     public Long getId() {
         return id;
@@ -119,6 +125,22 @@ public class TeacherDTO implements Serializable {
 
     public void setLastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
+    }
+
+    public List<RatingDTO> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<RatingDTO> ratings) {
+        this.ratings = ratings;
     }
 
     @Override

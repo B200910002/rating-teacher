@@ -1,6 +1,8 @@
 package com.ocean.repository;
 
 import com.ocean.domain.Rating;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface RatingRepository extends JpaRepository<Rating, Long>, JpaSpecificationExecutor<Rating> {}
+public interface RatingRepository extends JpaRepository<Rating, Long>, JpaSpecificationExecutor<Rating> {
+    List<Rating> findByTeacherId(Long teacherId);
+}

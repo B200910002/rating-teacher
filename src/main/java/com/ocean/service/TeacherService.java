@@ -1,8 +1,11 @@
 package com.ocean.service;
 
 import com.ocean.domain.Teacher;
+import com.ocean.repository.RatingRepository;
 import com.ocean.repository.TeacherRepository;
+import com.ocean.service.dto.RatingDTO;
 import com.ocean.service.dto.TeacherDTO;
+import com.ocean.service.mapper.RatingMapper;
 import com.ocean.service.mapper.TeacherMapper;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,11 +27,22 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
 
+    private final RatingRepository ratingRepository;
+
+    private final RatingMapper ratingMapper;
+
     private final TeacherMapper teacherMapper;
 
-    public TeacherService(TeacherRepository teacherRepository, TeacherMapper teacherMapper) {
+    public TeacherService(
+        TeacherRepository teacherRepository,
+        TeacherMapper teacherMapper,
+        RatingRepository ratingRepository,
+        RatingMapper ratingMapper
+    ) {
         this.teacherRepository = teacherRepository;
         this.teacherMapper = teacherMapper;
+        this.ratingRepository = ratingRepository;
+        this.ratingMapper = ratingMapper;
     }
 
     /**
@@ -116,6 +130,21 @@ public class TeacherService {
     public Optional<List<TeacherDTO>> findByCodeAndName(String teacherCode, String teacherName) {
         log.debug("REST request to get Teacher by Code: {} or Name: {}", teacherCode, teacherName);
         return teacherRepository.findByTeacherCodeAndFirstName(teacherCode, teacherName).map(teacherMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TeacherDTO> findAllWithRatings() {
+        List<TeacherDTO> teachers = findAll(); // This method returns List<TeacherDTO>
+        teachers.forEach(teacher -> {
+            List<RatingDTO> ratings = ratingRepository
+                .findByTeacherId(teacher.getId())
+                .stream()
+                .map(ratingMapper::toDto)
+                .collect(Collectors.toList());
+            teacher.setRatings(ratings);
+            teacher.setRatingCount(ratings.size());
+        });
+        return teachers;
     }
 
     /**

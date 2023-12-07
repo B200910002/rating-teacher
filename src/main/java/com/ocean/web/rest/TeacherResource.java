@@ -154,6 +154,20 @@ public class TeacherResource {
     }
 
     /**
+     * {@code GET  /teachers} : get all the teachers.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of teachers in body.
+     */
+    @CrossOrigin(origins = "*")
+    @GetMapping("/teacher-with-rating")
+    public ResponseEntity<List<TeacherDTO>> getAllTeachersWithRatings() {
+        log.debug("REST request to get Teachers with Ratings");
+        List<TeacherDTO> entityList = teacherService.findAllWithRatings();
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
      * {@code GET  /teachers/count} : count all the teachers.
      *
      * @param criteria the criteria which the requested entities should match.

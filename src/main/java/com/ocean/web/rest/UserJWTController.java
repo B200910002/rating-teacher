@@ -65,6 +65,7 @@ public class UserJWTController {
 
         // Fetch student info based on username (student code)
         Optional<StudentDTO> studentDTO = studentService.findOneByStudentCode(username);
+        return new ResponseEntity<>(studentDTO, httpHeaders, HttpStatus.OK);
 
         if (studentDTO.isPresent()) {
             // Assuming the token is still valid and you have access to it

@@ -1,10 +1,13 @@
 package com.ocean.config;
 
+import java.io.IOException;
 import java.util.Arrays;
 import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.server.*;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -57,5 +60,26 @@ public class WebConfigurer implements ServletContextInitializer {
         source.registerCorsConfiguration("/v3/api-docs", config);
         source.registerCorsConfiguration("/swagger-ui/**", config);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public FilterRegistrationBean<Filter> referrerPolicyFilterRegistration() {
+        FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new ReferrerPolicyFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("referrerPolicyFilter");
+        registration.setOrder(1);
+        return registration;
+    }
+
+    public static class ReferrerPolicyFilter implements Filter {
+
+        @Override
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+            httpServletResponse.setHeader("Referrer-Policy", "no-referrer");
+            chain.doFilter(request, response);
+        }
+        // Other methods can be overridden as needed
     }
 }

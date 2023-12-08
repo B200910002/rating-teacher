@@ -16,7 +16,7 @@
     "dtoSuffix": "DTO",
     "enableGradleEnterprise": false,
     "enableHibernateCache": false,
-    "enableSwaggerCodegen": false,
+    "enableSwaggerCodegen": true,
     "enableTranslation": true,
     "entities": ["Student", "Teacher", "Lesson", "Rating", "Like", "Question", "Answer", "Schedule", "LessonTime", "Room"],
     "entitySuffix": "",

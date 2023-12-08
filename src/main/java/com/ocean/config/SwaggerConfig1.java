@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig { // Rename the class to match the file name
+public class SwaggerConfig1 { // Rename the class to match the file name
 
     @Bean
     public Docket api() {
